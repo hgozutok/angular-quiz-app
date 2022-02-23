@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuizServiceService } from '../quiz-service.service';
 
 import { never } from 'rxjs';
-
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-quiz-main',
@@ -21,6 +21,7 @@ export class QuizMainComponent implements OnInit {
   givenAnswers: string[] = [];
   ended: boolean = false;
   score: number = 0;
+  selectedRadioButtonValue: string = "";
 
 
 
@@ -33,13 +34,11 @@ export class QuizMainComponent implements OnInit {
 
   }
   startQuiz() {
-
-
     this.resetQuiz();
     this.getQuiz();
-
-
+    console.log(this.selectedRadioButtonValue);
   }
+
   resetQuiz() {
     this.questionNumber = 0;
     this.answers = [""];
@@ -79,7 +78,7 @@ export class QuizMainComponent implements OnInit {
   }
   getQuiz() {
 
-    this.service.getQuiz().then(
+    this.service.getQuiz(this.selectedRadioButtonValue).then(
       (data: Quiz) => {
         this.questions = data.results;
         this.started = true;
@@ -92,6 +91,7 @@ export class QuizMainComponent implements OnInit {
         this.started = true;
         this.ended = false;
 
+        console.log(data);
         console.log(this.questions);
         console.log(this.answers);
       }

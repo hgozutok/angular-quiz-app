@@ -2,7 +2,34 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <button class="btn btn-primary btn-round" (click)="startQuiz()">Start New Quiz</button>
+        <div class="row">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+
+            <label class="btn btn-secondary active">
+              <input type="radio" value="" [ngModel]="selectedRadioButtonValue"
+                (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option1" autocomplete="off"
+                checked> Random
+            </label>
+            <label class="btn btn-secondary">
+              <input type="radio" value="easy" [ngModel]="selectedRadioButtonValue"
+                (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option2" autocomplete="off"> Easy
+            </label>
+            <label class="btn btn-secondary">
+              <input type="radio" value="medium" [ngModel]="selectedRadioButtonValue"
+                (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option22" autocomplete="off">
+              Medium
+            </label>
+            <label class="btn btn-secondary">
+              <input type="radio" value="hard" [ngModel]="selectedRadioButtonValue"
+                (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option22" autocomplete="off">
+              Hard
+            </label>
+
+            <button class="btn btn-primary btn-round" (click)="startQuiz()">Start New Quiz</button>
+          </div>
+
+        </div>
         <div class="centerItems ">
           <ng-template [ngIf]="started" [ngIfElse]="NotStarted">
             <div class="card-container  ">
@@ -36,8 +63,9 @@
               </div>
             </ng-template>
             <ng-template #startgame>
-              <div>
-                Please start the 🎱
+              <div class="centerItems">
+                <h3>Please start the quiz</h3>
+
               </div>
             </ng-template>
           </ng-template>

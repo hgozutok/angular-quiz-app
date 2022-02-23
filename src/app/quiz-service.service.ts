@@ -14,8 +14,16 @@ export class QuizServiceService {
 
   constructor() { }
 
-  getQuiz() {
-    return axios.get<Quiz>(environment.QUIZ_API_URL).then(
+  getQuiz(difficulty: string) {
+    // console.log(difficulty);
+    let url = environment.QUIZ_API_URL;
+    if (difficulty != null || difficulty != "") {
+      url = url + "&difficulty=" + difficulty;
+    } else {
+      url = environment.QUIZ_API_URL;
+    }
+    // console.log(url);
+    return axios.get<Quiz>(url).then(
       (response) => {
         return response.data;
       }
