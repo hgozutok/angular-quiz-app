@@ -3,46 +3,46 @@
     <div class="row">
       <div class="col-md-12">
         <button class="btn btn-primary btn-round" (click)="startQuiz()">Start Quiz</button>
-
-        <ng-template [ngIf]="started" [ngIfElse]="NotStarted">
-          <div class="card-container">
-            <div class="card">
-              <div class="front">
-                <div class="cover">
-                  Q.No:{{questionNumber+1}}/{{questions.length}}
-                  <!-- <img src="assets/img/quiz.jpg" /> -->
-                </div>
-                <div class="user">
-                  <!-- <img class="img-circle" src="assets/img/quiz.jpg" /> -->
-                </div>
-                <div class="content">
-                  <div class="main">
-                    <h3 class="name">{{questions[questionNumber].question}}</h3>
-                    <p *ngFor="let answer of answers" class="description">
-                      <button class="btn btn-primary btn-round" (click)="selectAnswer(answer)">{{answer}}</button>
-
+        <div class="centerItems ">
+          <ng-template [ngIf]="started" [ngIfElse]="NotStarted">
+            <div class="card-container bgShadow ">
+              <div class="card">
+                <div class="front">
+                  <div class="cover">
+                    Q.No:{{questionNumber+1}}/{{questions.length}}
+                    <!-- <img src="assets/img/quiz.jpg" /> -->
                   </div>
-                </div>
-              </div> <!-- end front panel -->
-            </div> <!-- end card -->
-          </div> <!-- end card-container -->
-        </ng-template>
+                  <div class="user">
+                    <!-- <img class="img-circle" src="assets/img/quiz.jpg" /> -->
+                  </div>
+                  <div class="content">
+                    <div class="main">
+                      <h3 class="name">{{questions[questionNumber].question}}</h3>
+                      <p *ngFor="let answer of answers" class="description">
+                        <button class="btn btn-primary btn-round" (click)="selectAnswer(answer)">{{answer}}</button>
 
-        <ng-template #NotStarted>
-          <ng-template [ngIf]="ended" [ngIfElse]="startgame">
-            <div>
-              Total Score: {{score}}
-
-            </div>
+                    </div>
+                  </div>
+                </div> <!-- end front panel -->
+              </div> <!-- end card -->
+            </div> <!-- end card-container -->
           </ng-template>
-          <ng-template #startgame>
-            <div>
-              Please start the 🎱
-            </div>
+
+          <ng-template #NotStarted>
+            <ng-template [ngIf]="ended" [ngIfElse]="startgame">
+              <div>
+                Total Score: {{score}}
+
+              </div>
+            </ng-template>
+            <ng-template #startgame>
+              <div>
+                Please start the 🎱
+              </div>
+            </ng-template>
           </ng-template>
-        </ng-template>
 
-
+        </div>
 
 
       </div>
