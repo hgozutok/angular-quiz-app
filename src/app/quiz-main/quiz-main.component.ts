@@ -130,9 +130,9 @@ export class QuizMainComponent implements OnInit {
         this.started = true;
         this.ended = false;
 
-        console.log(data);
-        console.log(this.questions);
-        console.log(this.answers);
+        // console.log(data);
+        // console.log(this.questions);
+        // console.log(this.answers);
       }
 
     )
