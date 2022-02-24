@@ -4,7 +4,10 @@
 }
 .centerItems {
   display: flex;
-  /* justify-content: center; */
+  height: 100%;
+  /* background-color: cadetblue;
+   */
+  justify-content: center; /**/
   align-items: center;
   width: 100%;
 }

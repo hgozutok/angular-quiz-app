@@ -6,6 +6,9 @@ import { QuizServiceService } from '../quiz-service.service';
 import { never } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
+//declare var $: any;
+declare var window: any;
+
 @Component({
   selector: 'app-quiz-main',
   templateUrl: './quiz-main.component.html',
@@ -22,21 +25,51 @@ export class QuizMainComponent implements OnInit {
   ended: boolean = false;
   score: number = 0;
   selectedRadioButtonValue: string = "";
+  time: number = 10;
 
-
+  formModal: any;
 
 
   constructor(private service: QuizServiceService) {
 
   }
+  countBack(): void {
+    setInterval(() => {
 
-  ngOnInit(): void {
+      this.started ? this.time-- : this.time;
+
+      if (this.time == 0) {
+        this.selectAnswer("");
+        this.time = 10;
+      }
+
+    }, 1000);
 
   }
+  ngOnInit(): void {
+    this.formModal = new window.bootstrap.Modal(
+      document.getElementById('fModal')
+    );
+    // if (this.started == true)
+    {
+      this.countBack();
+    }
+  }
+  showModal(): void {
+    this.formModal.show();
+
+  }
+  hideModal(): void {
+    this.formModal.hide();
+
+  }
+
+
   startQuiz() {
     this.resetQuiz();
     this.getQuiz();
-    console.log(this.selectedRadioButtonValue);
+    this.hideModal();
+    // console.log(this.selectedRadioButtonValue);
   }
 
   resetQuiz() {
@@ -47,14 +80,17 @@ export class QuizMainComponent implements OnInit {
     this.score = 0;
     this.started = false;
     this.questions = [];
+    this.time = 10;
 
 
   }
 
   selectAnswer(answer: string) {
+    this.time = 10;
     if (this.questions[this.questionNumber].correct_answer == answer) {
       this.givenAnswers[this.questionNumber] = "correct";
       this.score++;
+
     }
     else {
       this.givenAnswers[this.questionNumber] = "incorrect";
@@ -70,6 +106,9 @@ export class QuizMainComponent implements OnInit {
     else { //quiz is ended
       this.ended = true;
       this.started = false;
+
+      //  open("#mymodal");
+      this.showModal();
     }
     //end quiz
 

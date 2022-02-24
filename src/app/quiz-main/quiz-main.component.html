@@ -1,78 +1,104 @@
-<div class="content" role="main">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="row">
-          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+<div class="container">
+  <div class="d-flex align-items-center justify-content-center">
+    <div class="row ">
+
+      <div class="row ">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+          <label class="btn btn-secondary active">
+            <input type="radio" value="" [ngModel]="selectedRadioButtonValue"
+              (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option1" autocomplete="off"
+              checked> Random
+          </label>
+          <label class="btn btn-secondary">
+            <input type="radio" value="easy" [ngModel]="selectedRadioButtonValue"
+              (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option2" autocomplete="off"> Easy
+          </label>
+          <label class="btn btn-secondary">
+            <input type="radio" value="medium" [ngModel]="selectedRadioButtonValue"
+              (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option22" autocomplete="off">
+            Medium
+          </label>
+          <label class="btn btn-secondary">
+            <input type="radio" value="hard" [ngModel]="selectedRadioButtonValue"
+              (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option22" autocomplete="off">
+            Hard
+          </label>
+
+          <button class="btn btn-primary btn-round" (click)="startQuiz()">Start New Quiz</button>
+          <div class=" rounded-full align-items-center justify-content-center">
+            <h3> Time :{{time}} </h3>
+
+          </div>
+        </div>
 
 
-            <label class="btn btn-secondary active">
-              <input type="radio" value="" [ngModel]="selectedRadioButtonValue"
-                (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option1" autocomplete="off"
-                checked> Random
-            </label>
-            <label class="btn btn-secondary">
-              <input type="radio" value="easy" [ngModel]="selectedRadioButtonValue"
-                (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option2" autocomplete="off"> Easy
-            </label>
-            <label class="btn btn-secondary">
-              <input type="radio" value="medium" [ngModel]="selectedRadioButtonValue"
-                (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option22" autocomplete="off">
-              Medium
-            </label>
-            <label class="btn btn-secondary">
-              <input type="radio" value="hard" [ngModel]="selectedRadioButtonValue"
-                (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option22" autocomplete="off">
-              Hard
-            </label>
+      </div>
+      <div class=" row centerItems d-flex">
+        <ng-template [ngIf]="started" [ngIfElse]="NotStarted">
 
-            <button class="btn btn-primary btn-round" (click)="startQuiz()">Start New Quiz</button>
+          <div class="cover">
+            Q.No:{{questionNumber+1}}/{{questions.length}}
+            <!-- <img src="assets/img/quiz.jpg" /> -->
           </div>
 
-        </div>
-        <div class="centerItems ">
-          <ng-template [ngIf]="started" [ngIfElse]="NotStarted">
-            <div class="card-container  ">
-              <div class="card">
-                <div class="front">
-                  <div class="cover">
-                    Q.No:{{questionNumber+1}}/{{questions.length}}
-                    <!-- <img src="assets/img/quiz.jpg" /> -->
-                  </div>
-                  <div class="user">
-                    <!-- <img class="img-circle" src="assets/img/quiz.jpg" /> -->
-                  </div>
-                  <div class="content">
-                    <div class="main">
-                      <h3 class="name">{{questions[questionNumber].question}}</h3>
-                      <p *ngFor="let answer of answers" class="description">
-                        <button class="btn btn-primary btn-round" (click)="selectAnswer(answer)">{{answer}}</button>
+          <div class="content">
+            <div class="main">
+              <h3 class="name">{{questions[questionNumber].question}}</h3>
+              <p *ngFor="let answer of answers" class="description">
+                <button class="btn btn-primary btn-round w-100" (click)="selectAnswer(answer)">{{answer}}</button>
 
-                    </div>
-                  </div>
-                </div> <!-- end front panel -->
-              </div> <!-- end card -->
-            </div> <!-- end card-container -->
+            </div>
+          </div>
+
+        </ng-template>
+
+        <ng-template #NotStarted>
+          <ng-template [ngIf]="ended" [ngIfElse]="startgame">
+
+
+
+
+            <div class="centerItems h-100 w-100">
+              Total Score: {{score}}
+
+            </div>
           </ng-template>
+          <ng-template #startgame>
+            <div class="flex align-middle d-flex  justify-content-center  align-items-center h-100 w-100">
+              <h3>Please start the quiz</h3>
 
-          <ng-template #NotStarted>
-            <ng-template [ngIf]="ended" [ngIfElse]="startgame">
-              <div>
-                Total Score: {{score}}
-
-              </div>
-            </ng-template>
-            <ng-template #startgame>
-              <div class="centerItems">
-                <h3>Please start the quiz</h3>
-
-              </div>
-            </ng-template>
+            </div>
           </ng-template>
+        </ng-template>
 
+      </div>
+
+
+
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="fModal" name="fModal" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Results</h5>
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button> -->
+          </div>
+          <div class="modal-body">
+            Total Score: {{score}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" (click)="hideModal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" (click)="startQuiz()" class="btn btn-primary">Start new</button>
+          </div>
         </div>
-
-
       </div>
     </div>
   </div>
