@@ -3,6 +3,8 @@
   box-shadow: 2px 2px 14px 2px rgba(0, 0, 0, 0.71);
 }
 .centerItems {
+  margin: 100px auto 50px;
+  padding: 0 16px;
   display: flex;
   height: 100%;
   /* background-color: cadetblue;

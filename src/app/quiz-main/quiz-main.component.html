@@ -38,7 +38,8 @@
         <ng-template [ngIf]="started" [ngIfElse]="NotStarted">
 
           <div class="cover">
-            Q.No:{{questionNumber+1}}/{{questions.length}}
+
+            <h4 class="text-danger">Q.No:{{questionNumber+1}}/{{questions.length}}</h4>
             <!-- <img src="assets/img/quiz.jpg" /> -->
           </div>
 
@@ -46,7 +47,7 @@
             <div class="main">
               <h3 class="name">{{questions[questionNumber].question}}</h3>
               <p *ngFor="let answer of answers" class="description">
-                <button class="btn btn-primary btn-round w-100" (click)="selectAnswer(answer)">{{answer}}</button>
+                <button class="btn btn-success btn-round w-100" (click)="selectAnswer(answer)">{{answer}}</button>
 
             </div>
           </div>
@@ -59,13 +60,15 @@
 
 
 
-            <div class="centerItems h-100 w-100">
-              Total Score: {{score}}
+            <div class="set-height flex align-middle d-flex  justify-content-center  align-items-center h-100 w-100">
 
+              <h3 class="text-danger">Total Score: {{score}}</h3>
             </div>
           </ng-template>
           <ng-template #startgame>
-            <div class="flex align-middle d-flex  justify-content-center  align-items-center h-100 w-100">
+            <div class="set-height flex align-middle d-flex  justify-content-center  align-items-center h-100 w-100">
+
+
               <h3>Please start the quiz</h3>
 
             </div>
@@ -92,10 +95,13 @@
             </button> -->
           </div>
           <div class="modal-body">
-            Total Score: {{score}}
+            <div class="set-height flex align-middle d-flex  justify-content-center  align-items-center h-100 w-100">
+
+              <h3 class="text-danger">Total Score: {{score}}</h3>
+            </div>
           </div>
           <div class="modal-footer">
-            <button type="button" (click)="hideModal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" (click)="hideModal()" class="btn btn-danger" data-dismiss="modal">Close</button>
             <button type="button" (click)="startQuiz()" class="btn btn-primary">Start new</button>
           </div>
         </div>
