@@ -2,44 +2,23 @@
   <div class="d-flex align-items-center justify-content-center">
     <div class="row ">
 
-      <div class="row ">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
 
-          <label class="btn btn-secondary active">
-            <input type="radio" value="" [ngModel]="selectedRadioButtonValue"
-              (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option1" autocomplete="off"
-              checked> Random
-          </label>
-          <label class="btn btn-secondary">
-            <input type="radio" value="easy" [ngModel]="selectedRadioButtonValue"
-              (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option2" autocomplete="off"> Easy
-          </label>
-          <label class="btn btn-secondary">
-            <input type="radio" value="medium" [ngModel]="selectedRadioButtonValue"
-              (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option22" autocomplete="off">
-            Medium
-          </label>
-          <label class="btn btn-secondary">
-            <input type="radio" value="hard" [ngModel]="selectedRadioButtonValue"
-              (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option22" autocomplete="off">
-            Hard
-          </label>
-
-          <button class="btn btn-primary btn-round" (click)="startQuiz()">Start New Quiz</button>
-          <div class=" rounded-full align-items-center justify-content-center">
-            <h3> Time :{{time}} </h3>
-
-          </div>
-        </div>
-
-
-      </div>
       <div class=" row centerItems d-flex">
+        <h1>Quiz Game</h1>
         <ng-template [ngIf]="started" [ngIfElse]="NotStarted">
 
-          <div class="cover">
+          <div class="d-flex justify-content-between">
+            <div class="col-md-4">
+              <h4 class="text-danger">Q.No:{{questionNumber+1}}/{{questions.length}}</h4>
+            </div>
+            <div class=" col-md-4 rounded-full align-items-center justify-content-center">
+              <h3> Time :{{time}} </h3>
+              <div class="progress">
+                <div class="progress-bar" [ngClass]="time>4 ? 'bg-info' : 'bg-danger'" role="progressbar"
+                  [style.width]="time*10 + '%'" aria-valuenow="{time}" aria-valuemin="0" aria-valuemax="10"></div>
+              </div>
 
-            <h4 class="text-danger">Q.No:{{questionNumber+1}}/{{questions.length}}</h4>
+            </div>
             <!-- <img src="assets/img/quiz.jpg" /> -->
           </div>
 
@@ -51,10 +30,46 @@
 
             </div>
           </div>
+          <div class="d-flex justify-content-end">
+            <div class="col-md-2">
+              <button class="btn btn-danger btn-round " (click)="endQuiz()">End Quiz</button>
+            </div>
+          </div>
 
         </ng-template>
 
         <ng-template #NotStarted>
+          <div class="row ">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+              <label class="btn btn-secondary active">
+                <input type="radio" value="" [ngModel]="selectedRadioButtonValue"
+                  (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option1" autocomplete="off"
+                  checked> Random
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" value="easy" [ngModel]="selectedRadioButtonValue"
+                  (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option2" autocomplete="off">
+                Easy
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" value="medium" [ngModel]="selectedRadioButtonValue"
+                  (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option22" autocomplete="off">
+                Medium
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" value="hard" [ngModel]="selectedRadioButtonValue"
+                  (ngModelChange)="selectedRadioButtonValue = $event" name="options" id="option22" autocomplete="off">
+                Hard
+              </label>
+
+            </div>
+            <div class="row p-5 m-5">
+              <button class="btn btn-primary btn-round" (click)="startQuiz()">Start New Quiz</button>
+            </div>
+
+
+          </div>
           <ng-template [ngIf]="ended" [ngIfElse]="startgame">
 
 

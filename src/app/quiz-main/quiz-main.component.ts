@@ -71,6 +71,13 @@ export class QuizMainComponent implements OnInit {
     this.hideModal();
     // console.log(this.selectedRadioButtonValue);
   }
+  endQuiz() {
+    this.ended = true;
+    this.started = false;
+
+
+    this.showModal();
+  }
 
   resetQuiz() {
     this.questionNumber = 0;
@@ -104,11 +111,7 @@ export class QuizMainComponent implements OnInit {
       this.answers = this.randomArrayShuffle(tempAnswers);
     }
     else { //quiz is ended
-      this.ended = true;
-      this.started = false;
-
-      //  open("#mymodal");
-      this.showModal();
+      this.endQuiz();
     }
     //end quiz
 
